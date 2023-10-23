@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/BestestTheaters/.vs
+/BestestTheaters/bin
+/BestestTheaters/obj
+*csproj.user
+*sln.user
