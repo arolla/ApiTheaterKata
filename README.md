@@ -1,7 +1,7 @@
-# ApiTheaterKata
+# ApiTheatreKata
 How to design pragmatic APIs
 
-Let us consider an online theater booking system, composed of existing systems, as described below.
+Let us consider an online theatre booking system, composed of existing systems, as described below.
 ![Legacy system](./LegacySystem.jpg?raw=true "Legacy system")
 
 * A legacy system done in C# on top of a SQL DB, ASP.Net (equivalent to Java with good old JSP's) 
