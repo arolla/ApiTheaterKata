@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestestTheaters", "BestestTheaters.csproj", "{E14EAE7D-DD55-49A8-AD87-65286CA2593C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters", "BestestTheaters\BestestTheaters.csproj", "{82C3DAAE-B1DE-4B15-9FF0-BC2CDB45D02B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters.WebApp", "BestestTheaters.WebApp\BestestTheaters.WebApp.csproj", "{A8AE4C75-1383-4220-B569-5D16766FE23B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E14EAE7D-DD55-49A8-AD87-65286CA2593C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E14EAE7D-DD55-49A8-AD87-65286CA2593C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E14EAE7D-DD55-49A8-AD87-65286CA2593C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E14EAE7D-DD55-49A8-AD87-65286CA2593C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82C3DAAE-B1DE-4B15-9FF0-BC2CDB45D02B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82C3DAAE-B1DE-4B15-9FF0-BC2CDB45D02B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82C3DAAE-B1DE-4B15-9FF0-BC2CDB45D02B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82C3DAAE-B1DE-4B15-9FF0-BC2CDB45D02B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8AE4C75-1383-4220-B569-5D16766FE23B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AE4C75-1383-4220-B569-5D16766FE23B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AE4C75-1383-4220-B569-5D16766FE23B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AE4C75-1383-4220-B569-5D16766FE23B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

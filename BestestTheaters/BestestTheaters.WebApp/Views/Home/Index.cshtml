@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <H2>
+        Get all shows
+    </H2>
+    <form asp-controller="Home" method="post">
+        <div class="form-group row">
+            <label for="Date" class="col-md-2 control-label">Date :</label>
+            <input class="form-control" id="Date" name="Date" type="date" value="@ViewData["Date"]" />
+        </div>
+
+        <div class="form-group row">
+            <input type="submit" asp-action="GetAllShows" formmethod="get" class="btn btn-success" value="GetAllShows" />
+        </div>
+
+    </form>
+</div>
+
+<div class="text-center">
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

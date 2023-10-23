@@ -2,9 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/BestestTheaters/.vs
-/BestestTheaters/bin
-/BestestTheaters/obj
+*.vs
+bin
+obj
 *csproj.user
 *sln.user
