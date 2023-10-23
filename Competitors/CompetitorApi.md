@@ -1,7 +1,7 @@
 ```
-GET http://bestest-theaters.com/users/{userId}/profile 
+GET https://bestest-theaters.com/users/{userId}/profile 
 
-POST http://bestest-theaters.com/show/searches 
+POST https://bestest-theaters.com/show/searches 
 
 { 
 
@@ -17,9 +17,9 @@ POST http://bestest-theaters.com/show/searches
 
   
 
-GET http://bestest-theaters.com/featured-shows/ 
+GET https://bestest-theaters.com/featured-shows/ 
 
-GET http://bestest-theaters.com/trending-shows/ 
+GET https://bestest-theaters.com/trending-shows/ 
 
-GET http://bestest-theaters.com/novelties/ 
+GET https://bestest-theaters.com/novelties/ 
 ```
