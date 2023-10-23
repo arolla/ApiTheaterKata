@@ -11,22 +11,25 @@ Let us consider an online theater booking system, composed of existing systems, 
 * From now, we have decided to extend preferably by adding new microservices 
 
 # Iterations
-## Iteration 1 
+## Iteration 1
+Create a mobile application. Reuse the existing services.
+
+## Iteration 2
 The business wants to introduce a waiting list (something brand new, never done before here) via a new REST API; 
 How to design it good enough upfront? 
 
-## Iteration 2
+## Iteration 3
 Competitor offers an endpoint to ```/recent``` to list the 10 most recent bookings and the business wants the same on top of our existing system.
 
-## Iteration 3
+## Iteration 4
 The business wants to sell through external retaillers (B2B2C opportunity): Open existing application to external consumers 
 * as a macro-service (split endpoints by bounded context)
 * How to mature our API faster?
 
-## Iteration 4
+## Iteration 5
 Competitor offers a multi-criteria search, so we need to do it too (but better for SEO) 
 
-## Iteration 5
+## Iteration 6
 A competitor offers data for sale and our data are better, so we have an opportunity to sell our data through an API -> offer direct access as well to our dataset without coupling.
 
 ## Iteration 6
