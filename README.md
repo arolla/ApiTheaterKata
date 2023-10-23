@@ -8,7 +8,7 @@ Let us consider an online theater booking system, composed of existing systems, 
 * An existing Importer component can import external csv & Excel files directly to the DB with the same validations as the screens 
 * We have some big DB tables that contain valuable sets of data about customers' behaviors
 * We have competitors, some of which already have public API's (see 
-![Competitor API](./Competitors/CompetitorApi.md "Competitor API"))
+[Competitor API](./Competitors/CompetitorApi.md))
 * From now, we have decided to extend preferably by adding new microservices 
 
 # Iterations
