@@ -2,12 +2,13 @@
 How to design pragmatic APIs
 
 Let us consider an online theater booking system, composed of existing systems, as described below.
-![Alt text](./LegacySystem.jpg?raw=true "Legacy system")
+![Legacy system](./LegacySystem.jpg?raw=true "Legacy system")
 
 * A legacy system done in C# on top of a SQL DB, ASP.Net (equivalent to Java with good old JSP's) 
 * An existing Importer component can import external csv & Excel files directly to the DB with the same validations as the screens 
 * We have some big DB tables that contain valuable sets of data about customers' behaviors
-* We have competitors, some of which already have public API's
+* We have competitors, some of which already have public API's (see 
+![Competitor API](./Competitors/CompetitorApi.md "Competitor API"))
 * From now, we have decided to extend preferably by adding new microservices 
 
 # Iterations
