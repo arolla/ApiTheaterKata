@@ -33,9 +33,7 @@ The business wants to sell through external retaillers (B2B2C opportunity): Open
 * How to mature our API faster?
 
 ## Iteration 7
-The business requests one more booking type -> extend the enum in the JSON response (STANDARD, SUPERIOR, VIP, and now PREMIER) 
-
-And a developer suggests to remove the 'originID' field in the response because now it's always the same as another field (dossierID now always the same as originID)
+The business requests one more booking type -> extend the enum in the JSON response (STANDARD, SUPERIOR, VIP, and now PREMIER). A developer suggests to remove the 'originID' field in the response because now it's always the same as another field (dossierID now always the same as originID).
 
 ## Next iterations
 ## Iteration 7
