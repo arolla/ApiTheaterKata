@@ -62,6 +62,3 @@ Add 'affiliate link' field to request
 
 ## Case 6 
 Remove a field in the request
-
-## Case 7 
-
