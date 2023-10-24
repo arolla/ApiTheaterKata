@@ -25,14 +25,21 @@ Competitor offers an endpoint to ```/recent``` to list the 10 most recent bookin
 Competitor offers a multi-criteria search, so we need to do it too (but better for SEO) 
 
 ## Iteration 5
+Identify the booking seats workflow to implement Hypermedia Controls (HATEOAS)
+
+## Iteration 6
 The business wants to sell through external retaillers (B2B2C opportunity): Open existing application to external consumers 
 * as a macro-service (split endpoints by bounded context)
 * How to mature our API faster?
 
-## Iteration 6
-A competitor offers data for sale and our data are better, so we have an opportunity to sell our data through an API -> offer direct access as well to our dataset without coupling.
-
-## Iteration 6
-The business wants to use our API for the mobile app but asks to make lots of changes of backend behaviors (editorial content) and of structure to reduce the bandwidth, eg remove 6 fields in the API request and remove 17 new fields to the API response -> Introduce a new (redundant) API for a different audience with different needs.
+## Iteration 7
+The business requests one more booking type -> extend the enum in the JSON response (STANDARD, SUPERIOR, VIP, and now PREMIER) 
+And a developer suggests to remove the 'originID' field in the response because now it's always the same as another field (dossierID now always the same as originID)
 
 ## Next iterations
+## Iteration 7
+A competitor offers data for sale and our data are better, so we have an opportunity to sell our data through an API -> offer direct access as well to our dataset without coupling.
+
+## Iteration 8
+The business wants to use our API for the mobile app but asks to make lots of changes of backend behaviors (editorial content) and of structure to reduce the bandwidth, eg remove 6 fields in the API request and remove 17 new fields to the API response -> Introduce a new (redundant) API for a different audience with different needs.
+
