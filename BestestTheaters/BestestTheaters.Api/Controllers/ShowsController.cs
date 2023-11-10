@@ -23,5 +23,10 @@ namespace BestestTheaters.Api.Controllers
             return this.businessFacade.FetchShows();
         }
 
+        [HttpGet("{showNumber}")]
+        public Show GetShow(int showNumber)
+        {
+            return businessFacade.FetchShows().FirstOrDefault(show => show.Id == showNumber);
+        }
     }
 }

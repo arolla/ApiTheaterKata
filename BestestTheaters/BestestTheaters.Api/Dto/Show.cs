@@ -8,5 +8,6 @@ namespace BestestTheaters.Api.Dto
         public DateOnly Date { get; set; }
         [JsonPropertyName("Title")] 
         public string Title { get; set; }
+        public int Id { get; internal set; }
     }
 }

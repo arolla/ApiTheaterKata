@@ -21,5 +21,16 @@ namespace BestestTheaters.Api.Tests
             Check.That(shows.All(show => !string.IsNullOrEmpty(show.Title))).IsTrue();
         }
 
+        [TestMethod]
+        public async Task ShouldReturnOneShow()
+        {
+            const string url = @"http://localhost:19792/Shows/2";
+            using HttpResponseMessage response = await new HttpClient().GetAsync(url);
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync();
+            var show = JsonSerializer.Deserialize<Show>(responseBody);
+            Check.That(show).IsNotNull();
+            Check.That(!string.IsNullOrEmpty(show.Title)).IsTrue();
+        }
     }
 }

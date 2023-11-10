@@ -8,6 +8,7 @@ namespace BestestTheaters.Api.Services
         {
             return Enumerable.Range(1, 5).Select(index => new Show
             {
+                Id = index,
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 Title = GetRundomTitle()
             })
