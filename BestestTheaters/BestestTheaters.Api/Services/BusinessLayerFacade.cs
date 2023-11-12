@@ -6,24 +6,20 @@ namespace BestestTheaters.Api.Services
     {
         public IEnumerable<Show> FetchShows()
         {
-            return Enumerable.Range(1, 5).Select(index => new Show
+            var TOMORROW = new DateTime(2023, 11, 12).AddDays(1);
+            var shows = new List<Show>
             {
-                Id = index,
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                Title = GetRundomTitle()
-            })
-            .ToArray();
-        }
-
-        private static string GetRundomTitle()
-        {
-            string[] Summaries = new[]
-            {
-                "Miraculous", "Les As de la jungle 2", "Jeanne du Barry",
-                "Anatomie d'une chute", "Tempête", "Passages", "Mon chat et moi",
-                "Les Choses simples", "Le Bleu du caftan", "Mon crime"
+                new Show{ Id =1, Date = TOMORROW, Title = "Miraculous"},
+                new Show{ Id =2, Date = TOMORROW, Title = "Les As de la jungle 2"},
+                new Show{ Id =3, Date = TOMORROW, Title = "Anatomie d'une chute"},
+                new Show{ Id =4, Date = TOMORROW, Title = "Tempête"},
+                new Show{ Id =5, Date = TOMORROW, Title = "Passages"},
+                new Show{ Id =6, Date = TOMORROW, Title = "Mon chat et moi"},
+                new Show{ Id =7, Date = TOMORROW, Title = "Les Choses simples"},
+                new Show{ Id =8, Date = TOMORROW, Title = "Le Bleu du caftan"},
+                new Show{ Id =9, Date = TOMORROW, Title = "Mon crime"}
             };
-            return Summaries[Random.Shared.Next(Summaries.Length)];
+            return shows;
         }
     }
 }

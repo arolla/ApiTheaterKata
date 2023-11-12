@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestestTheaters.Api", "BestestTheaters.Api\BestestTheaters.Api.csproj", "{324A985D-2214-4F0C-884B-31C3CBE94C94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters.Api.Tests", "BestestTheaters.Api.Tests\BestestTheaters.Api.Tests.csproj", "{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestestTheaters.Api.Tests", "BestestTheaters.Api.Tests\BestestTheaters.Api.Tests.csproj", "{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters.Api", "BestestTheaters.Api\BestestTheaters.Api.csproj", "{385D525A-C005-43A4-819A-6A9B29774E45}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{324A985D-2214-4F0C-884B-31C3CBE94C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{324A985D-2214-4F0C-884B-31C3CBE94C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{324A985D-2214-4F0C-884B-31C3CBE94C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{324A985D-2214-4F0C-884B-31C3CBE94C94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDE1FF20-79C3-40C9-9E2F-6CD81BDC01C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{385D525A-C005-43A4-819A-6A9B29774E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{385D525A-C005-43A4-819A-6A9B29774E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{385D525A-C005-43A4-819A-6A9B29774E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{385D525A-C005-43A4-819A-6A9B29774E45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
