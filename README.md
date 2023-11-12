@@ -13,23 +13,25 @@ Let us consider an online theater booking system, composed of existing systems, 
 # Iterations
 ## Iteration 1
 Create a mobile application. Reuse the existing services.
+New features: get all events & book a show
 
 ## Iteration 2
+Duplication of business rules between “Legacy Importer” and “Legacy backend”
+How to refactor that?
+
+## Iteration 3
 The business wants to introduce a waiting list (something brand new, never done before here) via a new REST API; 
 How to design it good enough upfront? 
 
-## Iteration 3
-Competitor offers an endpoint to ```/recent``` to list the 10 most recent bookings and the business wants the same on top of our existing system.
-
 ## Iteration 4
-Competitor offers a multi-criteria search, so we need to do it too (but better for SEO) 
+Competitor offers an endpoint to ```/recent``` to list the 10 most recent bookings and the business wants the same on top of our existing system.
 
 ## Iteration 5
 Identify the booking seats workflow to implement Hypermedia Controls (HATEOAS)
 
 ## Iteration 6
-The business wants to sell through external retaillers (B2B2C opportunity): Open existing application to external consumers 
-* as a macro-service (split endpoints by bounded context)
+The business wants to sell through external retaillers (B2B2C opportunity): 
+* Open existing application to external consumers as a macro-service (split endpoints by bounded context)
 * How to mature our API faster?
 
 ## Iteration 7
