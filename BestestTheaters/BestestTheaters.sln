@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters.Api.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestestTheaters.Api", "BestestTheaters.Api\BestestTheaters.Api.csproj", "{385D525A-C005-43A4-819A-6A9B29774E45}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestestTheater.WebApp", "BestestTheater.WebApp\BestestTheater.WebApp.csproj", "{EAD36659-A41F-43C7-87B3-684C5F959C37}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{385D525A-C005-43A4-819A-6A9B29774E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{385D525A-C005-43A4-819A-6A9B29774E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{385D525A-C005-43A4-819A-6A9B29774E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAD36659-A41F-43C7-87B3-684C5F959C37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAD36659-A41F-43C7-87B3-684C5F959C37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAD36659-A41F-43C7-87B3-684C5F959C37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAD36659-A41F-43C7-87B3-684C5F959C37}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
