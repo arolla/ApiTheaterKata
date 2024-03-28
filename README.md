@@ -16,7 +16,7 @@ Create a mobile application. Reuse the existing services.
 New features: get all events & book a show
 
 ## Iteration 2
-Duplication of business rules between “Legacy Importer” and “Legacy backend”
+Duplication of business rules between "Legacy Importer" and "Legacy backend"
 How to refactor that?
 
 ## Iteration 3
