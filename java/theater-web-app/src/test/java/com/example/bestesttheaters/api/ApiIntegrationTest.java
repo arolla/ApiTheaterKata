@@ -19,10 +19,18 @@ public class ApiIntegrationTest {
 			.isOk()
 			.expectBody()
 			.json("""
-				{
-					"shows": []
-				}
-				""");
+                    {
+                    	"shows":[
+                    		{"id":1,"title":"Miraculous"},
+                    		{"id":2,"title":"Les As de la jungle 2"},
+                    		{"id":3,"title":"Anatomie d'une chute"},
+                    		{"id":4,"title":"Tempête"},
+                    		{"id":5,"title":"Passages"},
+                    		{"id":6,"title":"Mon chat et moi"},
+                    		{"id":7,"title":"Les Choses simples"},
+                    		{"id":8,"title":"Le Bleu du caftan"},
+                    		{"id":9,"title":"Mon crime"}]
+                    }""");
 	}
 
 	@Test

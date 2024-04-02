@@ -1,6 +1,6 @@
 package com.example.bestesttheaters.api;
 
-import jakarta.validation.Valid;
+import com.example.bestesttheaters.data.InMemoryRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,9 +8,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class ApiController {
+
+	private final InMemoryRepository repository;
+
+	public ApiController(InMemoryRepository repository) {
+		this.repository = repository;
+	}
+
 	@GetMapping("/shows")
 	public ShowsDto listShows() {
-		return new ShowsDto(List.of());
+		List<ShowDto> shows = repository.findAll().stream()
+			.map(show -> new ShowDto(show.getId(), show.getTitle(), show.getDate()))
+			.toList();
+		return new ShowsDto(shows);
 	}
 
 	@GetMapping("/bookings")

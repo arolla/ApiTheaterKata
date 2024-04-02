@@ -1,11 +1,19 @@
 package com.example.bestesttheaters.api;
 
+import com.example.bestesttheaters.data.InMemoryRepository;
+import com.example.bestesttheaters.data.Show;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -17,15 +25,33 @@ public class ApiControllerTest {
 	@Autowired
 	private MockMvc mockMvc;
 
+	@MockBean
+	private InMemoryRepository repository;
+
+	@BeforeEach
+	void setUp() {
+		List<Show> show = List.of(
+			Show.createShow(1,
+				LocalDateTime.parse("2021-12-01T20:00:00"),
+				"The Matrix")
+		);
+		when(repository.findAll()).thenReturn(show);
+	}
+
 	@Test
 	void listShows() throws Exception {
 		mockMvc.perform(get("/api/v1/shows"))
 			.andExpect(status().isOk())
 			.andExpect(content().json("""
 				{
-					"shows": []
-				}
-				"""));
+					"shows": [
+						{
+							"id":1,
+							"title":"The Matrix",
+							"date":"1 déc. 2021, 20:00:00"
+						}
+					]
+				}"""));
 	}
 
 	@Test
