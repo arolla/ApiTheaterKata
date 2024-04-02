@@ -12,16 +12,16 @@ public class ApiIntegrationTest {
 	@Test
 	void listShows(@Autowired WebTestClient webTestClient) {
 		webTestClient.get()
-				.uri("/api/v1/shows")
-				.exchange()
-				.expectStatus()
-				.isOk()
-				.expectBody()
-				.json("""
-                        {
-                        	"shows": []
-                        }
-                        """);
+			.uri("/api/v1/shows")
+			.exchange()
+			.expectStatus()
+			.isOk()
+			.expectBody()
+			.json("""
+				{
+					"shows": []
+				}
+				""");
 	}
 
 	@Test
@@ -39,5 +39,13 @@ public class ApiIntegrationTest {
 				""");
 	}
 
+	@Test
+	void book(@Autowired WebTestClient webTestClient) {
+		webTestClient.post()
+			.uri("/api/v1/bookings")
+			.exchange()
+			.expectStatus()
+			.isOk();
+	}
 
 }
