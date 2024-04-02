@@ -24,5 +24,20 @@ public class ApiIntegrationTest {
                         """);
 	}
 
+	@Test
+	void listBookings(@Autowired WebTestClient webTestClient) {
+		webTestClient.get()
+			.uri("/api/v1/bookings")
+			.exchange()
+			.expectStatus()
+			.isOk()
+			.expectBody()
+			.json("""
+				{
+					"bookings": []
+				}
+				""");
+	}
+
 
 }

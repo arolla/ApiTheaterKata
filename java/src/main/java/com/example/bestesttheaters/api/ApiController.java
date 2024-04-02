@@ -14,4 +14,9 @@ public class ApiController {
 		return new ShowsDto(List.of());
 	}
 
+	@GetMapping("/bookings")
+	public BookingsDto listBookings() {
+		return new BookingsDto(List.of());
+	}
+
 }
