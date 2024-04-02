@@ -1,9 +1,7 @@
 package com.example.bestesttheaters.api;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +19,7 @@ public class ApiController {
 	}
 
 	@PostMapping("/bookings")
-	public void book() {
+	public BookingDto book(@RequestBody BookingRequestDto bookingRequest) {
+		return new BookingDto(1, bookingRequest.showId(), bookingRequest.numberOfTickets());
 	}
 }
