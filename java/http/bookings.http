@@ -1,0 +1,14 @@
+###
+GET http://localhost:8080/api/v1/shows
+
+###
+GET http://localhost:8080/api/v1/bookings
+
+###
+POST http://localhost:8080/api/v1/bookings
+Content-Type: application/json
+
+{
+    "showId": 1,
+    "seatNumber": 1
+}
