@@ -1,4 +1,6 @@
 package com.example.bestesttheaters.api;
 
-public record ShowsDto() {
+import java.util.List;
+
+public record ShowsDto(List<Object> shows) {
 }
