@@ -4,13 +4,14 @@ import org.springframework.shell.command.annotation.Command;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Command(group = "shows")
-public class DisplayShowsCommand {
+public class ShowsCommand {
 
     private final WebClient httpClient;
 
-    public DisplayShowsCommand(WebClient httpClient) {
+    public ShowsCommand(WebClient httpClient) {
         this.httpClient = httpClient;
     }
+
     @Command(command = "display-shows")
     public void displayShows() {
         httpClient.get()
