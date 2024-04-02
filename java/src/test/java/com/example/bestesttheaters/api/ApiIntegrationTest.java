@@ -18,7 +18,9 @@ public class ApiIntegrationTest {
 				.isOk()
 				.expectBody()
 				.json("""
-                        {}
+                        {
+                        	"shows": []
+                        }
                         """);
 	}
 
