@@ -30,6 +30,7 @@ public class ApiController {
 
 	@PostMapping("/bookings")
 	public BookingDto book(@RequestBody BookingRequestDto bookingRequest) {
-		return new BookingDto(1, bookingRequest.showId(), bookingRequest.numberOfTickets());
+		int newBookingId = repository.findAllBookings().size() + 1;
+		return new BookingDto(newBookingId, bookingRequest.showId(), bookingRequest.numberOfTickets());
 	}
 }

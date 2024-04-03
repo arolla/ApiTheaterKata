@@ -64,7 +64,7 @@ public class ApiIntegrationTest {
 			.expectBody()
 			.json("""
                 {
-					"bookingId": 1,
+					"bookingId": 4,
 					"showId": 1,
 					"numberOfTickets": 2
 				}""");
