@@ -14,16 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InMemoryRepositoryTest {
 
 	@Test
-	void defaultLoad() {
-		var repository = new InMemoryRepository();
-		List<Show> all = repository.findAll();
-		assertEquals(9, all.size());
-	}
-
-	@Test
 	void fileLoad() throws URISyntaxException, IOException {
-		var repository = new InMemoryRepository();
 		Path jsonPath = getJsonPath("/shows.csv");
+		var repository = new InMemoryRepository(jsonPath.toString());
 		repository.load(jsonPath);
 		List<Show> all = repository.findAll();
 		assertEquals(9, all.size());

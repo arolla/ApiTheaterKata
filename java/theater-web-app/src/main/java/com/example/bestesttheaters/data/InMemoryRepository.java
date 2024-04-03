@@ -15,6 +15,8 @@
  */
 package com.example.bestesttheaters.data;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -30,24 +32,11 @@ public class InMemoryRepository {
 
 	private final List<Show> shows = new ArrayList<>();
 	private final List<Booking> bookings;
+	private final String jsonFile;
 
-	public InMemoryRepository() {
-        shows.addAll(defaultShows());
+	public InMemoryRepository(@Value("${shows.file}") String jsonFile) {
+		this.jsonFile = jsonFile;
 		bookings = new ArrayList<>();
-	}
-
-	private List<Show> defaultShows() {
-		var TOMORROW = LocalDateTime.now().plusDays(1);
-		return List.of(
-			Show.createShow(1, TOMORROW, "Miraculous"),
-			Show.createShow(2, TOMORROW, "Les As de la jungle 2"),
-			Show.createShow(3, TOMORROW, "Anatomie d'une chute"),
-			Show.createShow(4, TOMORROW, "Tempête"),
-			Show.createShow(5, TOMORROW, "Passages"),
-			Show.createShow(6, TOMORROW, "Mon chat et moi"),
-			Show.createShow(7, TOMORROW, "Les Choses simples"),
-			Show.createShow(8, TOMORROW, "Le Bleu du caftan"),
-			Show.createShow(9, TOMORROW, "Mon crime"));
 	}
 
 	public List<Show> findAll() {
@@ -60,6 +49,11 @@ public class InMemoryRepository {
 
 	public void saveBooking(Booking show) {
 		bookings.add(show);
+	}
+
+	@PostConstruct
+	public void init() throws IOException {
+		load(Path.of(jsonFile));
 	}
 
 	public void load(Path jsonFile) throws IOException {
