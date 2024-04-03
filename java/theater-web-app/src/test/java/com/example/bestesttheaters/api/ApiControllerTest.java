@@ -71,7 +71,12 @@ public class ApiControllerTest {
 							"title":"The Matrix",
 							"date":"1 déc. 2021, 20:00:00"
 						}
-					]
+					],
+					"_links": {
+						"self": {
+							"href":"http://localhost/api/v1/shows"
+						}
+					}
 				}"""));
 	}
 

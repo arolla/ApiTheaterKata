@@ -2,11 +2,13 @@ package com.example.bestesttheaters.api;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.Links;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 import java.util.Objects;
 
-public final class ShowsDto {
+public final class ShowsDto extends RepresentationModel<ShowsDto> {
     private final List<ShowDto> shows;
 
 	@JsonCreator
@@ -19,7 +21,7 @@ public final class ShowsDto {
         return shows;
     }
 
-    @Override
+	@Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;

@@ -2,11 +2,13 @@ package com.example.bestesttheaters.api;
 
 import com.example.bestesttheaters.data.BookingService;
 import com.example.bestesttheaters.data.InMemoryRepository;
+import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -35,7 +37,10 @@ public class ApiController {
 		List<ShowDto> shows = repository.findAll().stream()
 			.map(show -> new ShowDto(show.getId(), show.getTitle(), show.getDate()))
 			.toList();
-		return new ShowsDto(shows);
+		Link selfLink = linkTo(ApiController.class).slash("shows").withSelfRel();
+		ShowsDto showsDto = new ShowsDto(shows);
+		showsDto.add(selfLink);
+		return showsDto;
 	}
 
 	@GetMapping("/bookings")
