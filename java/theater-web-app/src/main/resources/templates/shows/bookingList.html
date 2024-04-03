@@ -21,6 +21,7 @@
     <th>Title</th>
     <th>Date</th>
     <th>Number of tickets</th>
+    <th>Status</th>
   </tr>
   </thead>
   <tbody>
@@ -28,7 +29,7 @@
     <td th:text="${bookings.show.title}"></td>
     <td th:text="${bookings.show.date}"></td>
     <td th:text="${bookings.numberOfTickets}"></td>
-    <td></td>
+    <td th:text="${bookings.status}"></td>
   </tr>
   </tbody>
 </table>

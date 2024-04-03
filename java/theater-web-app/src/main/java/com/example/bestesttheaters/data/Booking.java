@@ -25,6 +25,7 @@ public class Booking {
 		booking.setId(id);
 		booking.setShow(show);
 		booking.setNumberOfTickets(numberOfTickets);
+		booking.setStatus(status);
 		return booking;
 	}
 
@@ -70,8 +71,8 @@ public class Booking {
 		if (id != booking.id) return false;
 		if (numberOfTickets != booking.numberOfTickets) return false;
 		if (!Objects.equals(show, booking.show)) return false;
-        return status == booking.status;
-    }
+		return status == booking.status;
+	}
 
 	@Override
 	public int hashCode() {
