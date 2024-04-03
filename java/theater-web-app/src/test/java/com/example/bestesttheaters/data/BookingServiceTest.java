@@ -25,6 +25,13 @@ class BookingServiceTest {
 	}
 
 	@Test
+	void unknownShowId() {
+		var bookingService = new BookingService(repository);
+		var bookingDto = bookingService.getBookingDto(new BookingRequestDto(42, 2));
+		assertEquals(new BookingDto(1, 42, 2, BookingStatus.UNKNOWN_SHOW), bookingDto);
+	}
+
+	@Test
 	void bookingSuccess() {
 		var bookingService = new BookingService(repository);
 		var bookingDto = bookingService.getBookingDto(new BookingRequestDto(1, 2));

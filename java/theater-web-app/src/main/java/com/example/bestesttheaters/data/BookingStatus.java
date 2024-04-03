@@ -1,5 +1,7 @@
 package com.example.bestesttheaters.data;
 
 public enum BookingStatus {
-	CANCELLED, BOOKED
+	UNKNOWN_SHOW,
+	CANCELLED,
+	BOOKED
 }

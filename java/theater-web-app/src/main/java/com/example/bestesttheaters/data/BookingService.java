@@ -23,6 +23,9 @@ public class BookingService {
 	}
 
 	private static BookingStatus getBookingStatus(BookingRequestDto bookingRequest, Show show) {
+		if (show == null) {
+			return BookingStatus.UNKNOWN_SHOW;
+		}
 		if (bookingRequest.numberOfTickets() > show.getCapacity()) {
 			return BookingStatus.CANCELLED;
 		}
