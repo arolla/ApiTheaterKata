@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,15 +21,15 @@ class BookingServiceTest {
 
 	@BeforeEach
 	void setUp() {
-        repository = mock(InMemoryRepository.class);
-        when(repository.findAll()).thenReturn(List.of(MATRIX));
+		repository = mock(InMemoryRepository.class);
+		when(repository.findAll()).thenReturn(List.of(MATRIX));
 	}
 
 	@Test
 	void unknownShowId() {
 		var bookingService = new BookingService(repository);
-		var bookingDto = bookingService.getBookingDto(new BookingRequestDto(42, 2));
-		assertEquals(new BookingDto(1, 42, 2, BookingStatus.UNKNOWN_SHOW), bookingDto);
+		assertThrows(IllegalArgumentException.class, () ->
+			bookingService.getBookingDto(new BookingRequestDto(42, 2)));
 	}
 
 	@Test

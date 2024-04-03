@@ -15,9 +15,9 @@
  */
 package com.example.bestesttheaters.controller;
 
-import com.example.bestesttheaters.data.Booking;
-import com.example.bestesttheaters.data.InMemoryRepository;
-import com.example.bestesttheaters.data.Show;
+import com.example.bestesttheaters.api.BookingDto;
+import com.example.bestesttheaters.api.BookingRequestDto;
+import com.example.bestesttheaters.data.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,10 +28,12 @@ import java.util.Optional;
 class BookingController {
 
 	private final InMemoryRepository showRepository;
+	private final BookingService bookingService;
 
-	public BookingController(InMemoryRepository showRepository) {
+	public BookingController(InMemoryRepository showRepository, BookingService bookingService) {
 		this.showRepository = showRepository;
-	}
+        this.bookingService = bookingService;
+    }
 
 	@ModelAttribute("show")
 	public Show loadShow(@PathVariable("showId") int showId) {
@@ -54,11 +56,16 @@ class BookingController {
 	public String processNewBookingForm(@ModelAttribute("show") Show show,
 										int numberOfTickets,
 										RedirectAttributes redirectAttributes) {
-		int id = showRepository.findAllBookings().size() + 1;
-		Booking booking = Booking.book(id, show, numberOfTickets);
-		showRepository.saveBooking(booking);
-		redirectAttributes.addFlashAttribute("message", "Your show has been booking successfully");
-		return "redirect:/bookings.html";
+		BookingDto bookingDto = bookingService.getBookingDto(new BookingRequestDto(show.getId(), numberOfTickets));
+
+		if (bookingDto.status() == BookingStatus.BOOKED) {
+			redirectAttributes.addFlashAttribute("message", "Your show has been booking successfully");
+			return "redirect:/bookings.html";
+		} else {
+			redirectAttributes.addFlashAttribute("message", "Sorry, your show cannot be booked");
+			return "redirect:/bookings.html";
+		}
+
 	}
 
 }

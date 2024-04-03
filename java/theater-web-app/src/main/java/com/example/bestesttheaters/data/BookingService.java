@@ -8,24 +8,28 @@ import org.springframework.stereotype.Service;
 public class BookingService {
 
 	private final InMemoryRepository repository;
-	private final ShowIndex showIndex;
+	private ShowIndex showIndex;
 
 	public BookingService(InMemoryRepository repository) {
 		this.repository = repository;
-		showIndex = new ShowIndex(repository.findAll());
 	}
 
 	public BookingDto getBookingDto(BookingRequestDto bookingRequest) {
+		if (showIndex == null) {
+			showIndex = new ShowIndex(repository.findAll());
+		}
 		Show show = showIndex.getShow(bookingRequest.showId());
+		if (show == null) {
+			throw new IllegalArgumentException(String.format("Unknown show ID: %d", bookingRequest.showId()));
+		}
 		BookingStatus booked = getBookingStatus(bookingRequest, show);
 		int newBookingId = repository.findAllBookings().size() + 1;
+		repository.saveBooking(Booking.createBooking(newBookingId, show, bookingRequest.numberOfTickets(), booked));
 		return new BookingDto(newBookingId, bookingRequest.showId(), bookingRequest.numberOfTickets(), booked);
 	}
 
 	private static BookingStatus getBookingStatus(BookingRequestDto bookingRequest, Show show) {
-		if (show == null) {
-			return BookingStatus.UNKNOWN_SHOW;
-		}
+		assert show != null;
 		if (bookingRequest.numberOfTickets() > show.getCapacity()) {
 			return BookingStatus.CANCELLED;
 		}
