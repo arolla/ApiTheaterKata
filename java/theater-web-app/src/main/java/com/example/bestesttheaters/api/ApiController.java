@@ -1,5 +1,6 @@
 package com.example.bestesttheaters.api;
 
+import com.example.bestesttheaters.data.BookingService;
 import com.example.bestesttheaters.data.InMemoryRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,10 +11,12 @@ import java.util.List;
 public class ApiController {
 
 	private final InMemoryRepository repository;
+	private final BookingService bookingService;
 
-	public ApiController(InMemoryRepository repository) {
+	public ApiController(InMemoryRepository repository, BookingService bookingService) {
 		this.repository = repository;
-	}
+        this.bookingService = bookingService;
+    }
 
 	@GetMapping("/shows")
 	public ShowsDto listShows() {
@@ -30,7 +33,7 @@ public class ApiController {
 
 	@PostMapping("/bookings")
 	public BookingDto book(@RequestBody BookingRequestDto bookingRequest) {
-		int newBookingId = repository.findAllBookings().size() + 1;
-		return new BookingDto(newBookingId, bookingRequest.showId(), bookingRequest.numberOfTickets());
+		return bookingService.getBookingDto(bookingRequest);
 	}
+
 }
