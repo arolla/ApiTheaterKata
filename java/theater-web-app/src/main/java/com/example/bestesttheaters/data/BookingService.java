@@ -15,6 +15,6 @@ public class BookingService {
 
     public BookingDto getBookingDto(BookingRequestDto bookingRequest) {
 		int newBookingId = repository.findAllBookings().size() + 1;
-		return new BookingDto(newBookingId, bookingRequest.showId(), bookingRequest.numberOfTickets());
+		return new BookingDto(newBookingId, bookingRequest.showId(), bookingRequest.numberOfTickets(), BookingStatus.BOOKED);
 	}
 }

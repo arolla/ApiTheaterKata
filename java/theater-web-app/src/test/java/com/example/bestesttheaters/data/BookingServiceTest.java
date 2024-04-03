@@ -13,6 +13,7 @@ class BookingServiceTest {
 		var mock = mock(InMemoryRepository.class);
 		var bookingService = new BookingService(mock);
 		var bookingDto = bookingService.getBookingDto(new BookingRequestDto(1, 2));
-		assertEquals(new BookingDto(1, 1, 2), bookingDto);
+		assertEquals(new BookingDto(1, 1, 2, BookingStatus.BOOKED), bookingDto);
 	}
+
 }

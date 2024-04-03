@@ -1,4 +1,6 @@
 package com.example.bestesttheaters.api;
 
-public record BookingDto(int bookingId, int showId, int numberOfTickets) {
+import com.example.bestesttheaters.data.BookingStatus;
+
+public record BookingDto(int bookingId, int showId, int numberOfTickets, BookingStatus status) {
 }
