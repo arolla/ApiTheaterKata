@@ -42,7 +42,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class BookingControllerTest {
 
 	private final LocalDateTime TOMORROW = LocalDateTime.parse("2021-07-01T00:00:00");
-	private final Show MIRACULOUS = Show.createShow(1, TOMORROW, "Miraculous");
+	private final Show MIRACULOUS = Show.createShowMediumCapacity(1, TOMORROW, "Miraculous");
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -54,14 +54,14 @@ class BookingControllerTest {
 	void setup() {
 		List<Show> shows = List.of(
 			MIRACULOUS,
-			Show.createShow(2, TOMORROW, "Les As de la jungle 2"),
-			Show.createShow(3, TOMORROW, "Anatomie d'une chute"),
-			Show.createShow(4, TOMORROW, "Tempête"),
-			Show.createShow(5, TOMORROW, "Passages"),
-			Show.createShow(6, TOMORROW, "Mon chat et moi"),
-			Show.createShow(7, TOMORROW, "Les Choses simples"),
-			Show.createShow(8, TOMORROW, "Le Bleu du caftan"),
-			Show.createShow(9, TOMORROW, "Mon crime"));
+			Show.createShowMediumCapacity(2, TOMORROW, "Les As de la jungle 2"),
+			Show.createShowMediumCapacity(3, TOMORROW, "Anatomie d'une chute"),
+			Show.createShowMediumCapacity(4, TOMORROW, "Tempête"),
+			Show.createShowMediumCapacity(5, TOMORROW, "Passages"),
+			Show.createShowMediumCapacity(6, TOMORROW, "Mon chat et moi"),
+			Show.createShowMediumCapacity(7, TOMORROW, "Les Choses simples"),
+			Show.createShowMediumCapacity(8, TOMORROW, "Le Bleu du caftan"),
+			Show.createShowMediumCapacity(9, TOMORROW, "Mon crime"));
 
 		given(showRepository.findAll()).willReturn(shows);
 	}

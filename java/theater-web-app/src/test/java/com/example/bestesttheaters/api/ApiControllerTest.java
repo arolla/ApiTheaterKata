@@ -34,7 +34,7 @@ public class ApiControllerTest {
 	@BeforeEach
 	void setUp() {
 		List<Show> show = List.of(
-			Show.createShow(1,
+			Show.createShowMediumCapacity(1,
 				LocalDateTime.parse("2021-12-01T20:00:00"),
 				"The Matrix")
 		);

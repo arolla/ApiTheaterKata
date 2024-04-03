@@ -69,7 +69,7 @@ public class InMemoryRepository {
 		shows.clear();
 		Files.readAllLines(jsonFile, StandardCharsets.UTF_8).forEach(line -> {
 			String[] columns = line.split(";");
-			Show show = Show.createShow(Integer.parseInt(columns[0]), LocalDateTime.parse(columns[1]), columns[2]);
+			Show show = Show.createShowMediumCapacity(Integer.parseInt(columns[0]), LocalDateTime.parse(columns[1]), columns[2]);
 			shows.add(show);
 		});
 	}

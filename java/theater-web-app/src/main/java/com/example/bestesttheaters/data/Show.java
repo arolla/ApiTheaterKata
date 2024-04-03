@@ -25,12 +25,18 @@ public class Show {
 	private String title;
 	private String date;
 	private Integer id;
+	private int capacity;
 
-	public static Show createShow(int id, LocalDateTime date, String title) {
+	public static Show createShowMediumCapacity(int id, LocalDateTime date, String title) {
+		return createShow(id, date, title, 100);
+	}
+
+	public static Show createShow(int id, LocalDateTime date, String title, int capacity) {
 		Show show = new Show();
 		show.setId(id);
 		show.setDate(date.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)));
 		show.setTitle(title);
+		show.setCapacity(capacity);
 		return show;
 	}
 
@@ -62,6 +68,14 @@ public class Show {
 		return date;
 	}
 
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -69,6 +83,7 @@ public class Show {
 
 		Show show = (Show) o;
 
+		if (capacity != show.capacity) return false;
 		if (!Objects.equals(title, show.title)) return false;
 		if (!Objects.equals(date, show.date)) return false;
         return Objects.equals(id, show.id);
@@ -79,6 +94,7 @@ public class Show {
 		int result = title != null ? title.hashCode() : 0;
 		result = 31 * result + (date != null ? date.hashCode() : 0);
 		result = 31 * result + (id != null ? id.hashCode() : 0);
+		result = 31 * result + capacity;
 		return result;
 	}
 
@@ -88,6 +104,7 @@ public class Show {
 			   "title='" + title + '\'' +
 			   ", date='" + date + '\'' +
 			   ", id=" + id +
+			   ", capacity=" + capacity +
 			   '}';
 	}
 }
