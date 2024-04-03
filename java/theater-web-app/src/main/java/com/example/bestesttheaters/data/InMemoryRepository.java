@@ -69,7 +69,16 @@ public class InMemoryRepository {
 		shows.clear();
 		Files.readAllLines(jsonFile, StandardCharsets.UTF_8).forEach(line -> {
 			String[] columns = line.split(";");
-			Show show = Show.createShowMediumCapacity(Integer.parseInt(columns[0]), LocalDateTime.parse(columns[1]), columns[2]);
+			int columnCount = columns.length;
+			int expectedCount = 4;
+			if (columnCount > expectedCount) {
+				LOG.warn("Line '{}' has extra column. Expect {} columns but has {}. Ignore unknown columns", line, expectedCount, columnCount);
+			}
+			int id = Integer.parseInt(columns[0]);
+			LocalDateTime date = LocalDateTime.parse(columns[1]);
+			String title = columns[2];
+			int capacity = Integer.parseInt(columns[3]);
+			Show show = Show.createShow(id, date, title, capacity);
 			shows.add(show);
 		});
 	}
