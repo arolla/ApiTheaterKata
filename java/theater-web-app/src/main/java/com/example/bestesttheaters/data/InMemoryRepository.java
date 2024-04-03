@@ -17,6 +17,10 @@ package com.example.bestesttheaters.data;
 
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,26 +28,26 @@ import java.util.List;
 @Service
 public class InMemoryRepository {
 
-	private final List<Show> shows;
+	private final List<Show> shows = new ArrayList<>();
 	private final List<Booking> bookings;
 
 	public InMemoryRepository() {
-		shows = defaultShows();
+        shows.addAll(defaultShows());
 		bookings = new ArrayList<>();
 	}
 
 	private List<Show> defaultShows() {
 		var TOMORROW = LocalDateTime.now().plusDays(1);
-        return List.of(
-            Show.createShow(1, TOMORROW, "Miraculous"),
-            Show.createShow(2, TOMORROW, "Les As de la jungle 2"),
-            Show.createShow(3, TOMORROW, "Anatomie d'une chute"),
-            Show.createShow(4, TOMORROW, "Tempête"),
-            Show.createShow(5, TOMORROW, "Passages"),
-            Show.createShow(6, TOMORROW, "Mon chat et moi"),
-            Show.createShow(7, TOMORROW, "Les Choses simples"),
-            Show.createShow(8, TOMORROW, "Le Bleu du caftan"),
-            Show.createShow(9, TOMORROW, "Mon crime"));
+		return List.of(
+			Show.createShow(1, TOMORROW, "Miraculous"),
+			Show.createShow(2, TOMORROW, "Les As de la jungle 2"),
+			Show.createShow(3, TOMORROW, "Anatomie d'une chute"),
+			Show.createShow(4, TOMORROW, "Tempête"),
+			Show.createShow(5, TOMORROW, "Passages"),
+			Show.createShow(6, TOMORROW, "Mon chat et moi"),
+			Show.createShow(7, TOMORROW, "Les Choses simples"),
+			Show.createShow(8, TOMORROW, "Le Bleu du caftan"),
+			Show.createShow(9, TOMORROW, "Mon crime"));
 	}
 
 	public List<Show> findAll() {
@@ -56,5 +60,14 @@ public class InMemoryRepository {
 
 	public void saveBooking(Booking show) {
 		bookings.add(show);
+	}
+
+	public void load(Path jsonFile) throws IOException {
+		shows.clear();
+		Files.readAllLines(jsonFile, StandardCharsets.UTF_8).forEach(line -> {
+			String[] columns = line.split(";");
+			Show show = Show.createShow(Integer.parseInt(columns[0]), LocalDateTime.parse(columns[1]), columns[2]);
+			shows.add(show);
+		});
 	}
 }
