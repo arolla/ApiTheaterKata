@@ -42,6 +42,24 @@ public class ApiControllerTest {
 	}
 
 	@Test
+	void singleShow() throws Exception {
+		mockMvc.perform(get("/api/v1/shows/1"))
+			.andExpect(status().isOk())
+			.andExpect(content().json("""
+				{
+					"id":1,
+					"title":"The Matrix",
+					"date":"1 déc. 2021, 20:00:00"
+				}"""));
+	}
+
+	@Test
+	void showNotFound() throws Exception {
+		mockMvc.perform(get("/api/v1/shows/42"))
+			.andExpect(status().isNotFound());
+	}
+
+	@Test
 	void listShows() throws Exception {
 		mockMvc.perform(get("/api/v1/shows"))
 			.andExpect(status().isOk())
