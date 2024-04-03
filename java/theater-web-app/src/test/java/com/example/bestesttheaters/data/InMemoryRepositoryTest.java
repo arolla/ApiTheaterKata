@@ -14,10 +14,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class InMemoryRepositoryTest {
 
 	@Test
-	void fileLoad() throws URISyntaxException, IOException {
+	void loadShowsFile() throws URISyntaxException, IOException {
 		Path jsonPath = getJsonPath("/shows.csv");
 		var repository = new InMemoryRepository(jsonPath.toString());
-		repository.load(jsonPath);
+		repository.loadShows(jsonPath);
 		List<Show> all = repository.findAll();
 		assertEquals(9, all.size());
 	}

@@ -53,10 +53,10 @@ public class InMemoryRepository {
 
 	@PostConstruct
 	public void init() throws IOException {
-		load(Path.of(jsonFile));
+		loadShows(Path.of(jsonFile));
 	}
 
-	public void load(Path jsonFile) throws IOException {
+	public void loadShows(Path jsonFile) throws IOException {
 		shows.clear();
 		Files.readAllLines(jsonFile, StandardCharsets.UTF_8).forEach(line -> {
 			String[] columns = line.split(";");
