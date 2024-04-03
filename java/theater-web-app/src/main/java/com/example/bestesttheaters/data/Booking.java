@@ -9,6 +9,13 @@ public class Booking {
 	private int numberOfTickets;
 
 	public static Booking createBooking(int id, Show show, int numberOfTickets) {
+		if (id <= 0) {
+			throw new IllegalArgumentException("Booking ID must be greater than 0");
+		}
+		Objects.requireNonNull(show);
+		if (numberOfTickets <= 0) {
+			throw new IllegalArgumentException("Number of tickets must be greater than 0");
+		}
 		Booking booking = new Booking();
 		booking.setId(id);
 		booking.setShow(show);

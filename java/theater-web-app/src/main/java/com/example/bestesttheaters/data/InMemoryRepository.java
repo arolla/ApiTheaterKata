@@ -86,9 +86,10 @@ public class InMemoryRepository {
 				Show show = index.getShow(showId);
 				if (show == null) {
 					LOG.warn("Show with id {} not found", showId);
+				} else {
+					Booking booking = Booking.createBooking(bookingId, show, numberOfSeats);
+					bookings.add(booking);
 				}
-				Booking booking = Booking.createBooking(bookingId, show, numberOfSeats);
-				bookings.add(booking);
 			});
 		} catch (IOException e) {
 			throw new IllegalStateException("Cannot load bookings", e);
@@ -99,12 +100,18 @@ public class InMemoryRepository {
 
 		private final Map<Integer, List<Show>> showsById;
 
-        private ShowIndex(List<Show> shows) {
-            showsById = buildIndex(shows);
-        }
+		private ShowIndex(List<Show> shows) {
+			showsById = buildIndex(shows);
+		}
 
-        Show getShow(int showId) {
+		Show getShow(int showId) {
 			List<Show> shows = showsById.get(showId);
+			if (shows == null) {
+				return null;
+			}
+			if (shows.isEmpty()) {
+				return null;
+			}
 			return shows.get(0);
 		}
 
