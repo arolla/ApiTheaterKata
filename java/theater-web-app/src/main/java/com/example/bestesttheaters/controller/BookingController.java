@@ -55,7 +55,7 @@ class BookingController {
 										int numberOfTickets,
 										RedirectAttributes redirectAttributes) {
 		int id = showRepository.findAllBookings().size() + 1;
-		Booking booking = Booking.createBooking(id, show, numberOfTickets);
+		Booking booking = Booking.book(id, show, numberOfTickets);
 		showRepository.saveBooking(booking);
 		redirectAttributes.addFlashAttribute("message", "Your show has been booking successfully");
 		return "redirect:/bookings.html";

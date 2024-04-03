@@ -70,7 +70,7 @@ public class InMemoryRepository {
 			int columnCount = columns.length;
 			int expectedCount = 4;
 			if (columnCount > expectedCount) {
-				LOG.warn("Line '{}' has extra column. Expect {} columns but has {}. Ignore unknown columns", line, expectedCount, columnCount);
+				LOG.warn("Line '{}' has extra column(s). Expect {} columns but has {}. Ignore unknown columns", line, expectedCount, columnCount);
 			}
 			int id = Integer.parseInt(columns[0]);
 			LocalDateTime date = LocalDateTime.parse(columns[1]);
@@ -87,14 +87,19 @@ public class InMemoryRepository {
 		try {
 			Files.readAllLines(jsonPath, StandardCharsets.UTF_8).forEach(line -> {
 				String[] columns = line.split(";");
+				int expectedColumn = 4;
+				if (columns.length > expectedColumn) {
+					LOG.warn("Line '{}' has extra column(s). Expect {} columns but has {}. Ignore unknown columns", line, expectedColumn, columns.length);
+				}
 				int bookingId = Integer.parseInt(columns[0]);
 				int showId = Integer.parseInt(columns[1]);
 				int numberOfSeats = Integer.parseInt(columns[2]);
+				BookingStatus status = BookingStatus.valueOf(columns[3]);
 				Show show = index.getShow(showId);
 				if (show == null) {
 					LOG.warn("Show with id {} not found", showId);
 				} else {
-					Booking booking = Booking.createBooking(bookingId, show, numberOfSeats);
+					Booking booking = Booking.createBooking(bookingId, show, numberOfSeats, status);
 					bookings.add(booking);
 				}
 			});

@@ -7,8 +7,13 @@ public class Booking {
 	private int id;
 	private Show show;
 	private int numberOfTickets;
+	private BookingStatus status;
 
-	public static Booking createBooking(int id, Show show, int numberOfTickets) {
+	public static Booking book(int id, Show show, int numberOfTickets) {
+		return createBooking(id, show, numberOfTickets, BookingStatus.BOOKED);
+	}
+
+	public static Booking createBooking(int id, Show show, int numberOfTickets, BookingStatus status) {
 		if (id <= 0) {
 			throw new IllegalArgumentException("Booking ID must be greater than 0");
 		}
@@ -47,6 +52,14 @@ public class Booking {
 		return numberOfTickets;
 	}
 
+	public void setStatus(BookingStatus status) {
+		this.status = status;
+	}
+
+	public BookingStatus getStatus() {
+		return status;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -56,7 +69,8 @@ public class Booking {
 
 		if (id != booking.id) return false;
 		if (numberOfTickets != booking.numberOfTickets) return false;
-        return Objects.equals(show, booking.show);
+		if (!Objects.equals(show, booking.show)) return false;
+        return status == booking.status;
     }
 
 	@Override
@@ -64,6 +78,7 @@ public class Booking {
 		int result = id;
 		result = 31 * result + (show != null ? show.hashCode() : 0);
 		result = 31 * result + numberOfTickets;
+		result = 31 * result + (status != null ? status.hashCode() : 0);
 		return result;
 	}
 
@@ -73,6 +88,7 @@ public class Booking {
 			   "id=" + id +
 			   ", show=" + show +
 			   ", numberOfTickets=" + numberOfTickets +
+			   ", status=" + status +
 			   '}';
 	}
 }

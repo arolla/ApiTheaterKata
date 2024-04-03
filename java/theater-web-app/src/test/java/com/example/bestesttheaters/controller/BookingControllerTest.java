@@ -70,7 +70,7 @@ class BookingControllerTest {
 	void testProcessNewBookingForm() throws Exception {
 		mockMvc.perform(post("/shows/1/booking/new").param("numberOfTickets", "3"))
 			.andExpect(status().is3xxRedirection());
-		Booking booking = Booking.createBooking(1, MIRACULOUS, 3);
+		Booking booking = Booking.book(1, MIRACULOUS, 3);
 		verify(showRepository).saveBooking(booking);
 	}
 
