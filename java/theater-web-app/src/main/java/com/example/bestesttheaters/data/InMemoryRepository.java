@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,9 @@ public class InMemoryRepository {
 
 	private void loadShows(Path jsonFile) throws IOException {
 		shows.clear();
+
+		shows.add(testShow());
+
 		Files.readAllLines(jsonFile, StandardCharsets.UTF_8).forEach(line -> {
 			String[] columns = line.split(";");
 			int columnCount = columns.length;
@@ -79,6 +83,11 @@ public class InMemoryRepository {
 			Show show = Show.createShow(id, date, title, capacity);
 			shows.add(show);
 		});
+	}
+
+	private static Show testShow() {
+		LocalDateTime tomorrow8pm = LocalDateTime.now().withHour(20).withMinute(0).withSecond(0).plus(Duration.ofDays(1));
+		return Show.createShow(0, tomorrow8pm, "Cyrano de Bergerac", 100);
 	}
 
 	private void loadBookings(Path jsonPath) {

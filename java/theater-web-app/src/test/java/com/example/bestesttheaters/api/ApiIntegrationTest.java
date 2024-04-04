@@ -21,6 +21,7 @@ public class ApiIntegrationTest {
 			.json("""
                     {
                     	"shows":[
+                    		{"id":0,"title":"Cyrano de Bergerac"},
                     		{"id":1,"title":"Miraculous"},
                     		{"id":2,"title":"Les As de la jungle 2"},
                     		{"id":3,"title":"Anatomie d'une chute"},
