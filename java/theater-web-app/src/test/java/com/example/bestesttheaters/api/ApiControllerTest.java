@@ -3,6 +3,7 @@ package com.example.bestesttheaters.api;
 import com.example.bestesttheaters.data.BookingService;
 import com.example.bestesttheaters.data.InMemoryRepository;
 import com.example.bestesttheaters.data.Show;
+import com.example.bestesttheaters.data.WaitListItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,7 +118,7 @@ public class ApiControllerTest {
 
 	@Test
 	void getWaitListItem() throws Exception {
-		when(repository.getWaitListItemDto(any(UUID.class))).thenReturn(new WaitListItemDto(WAITING_LIST_ID, 1, 2));
+		when(repository.getWaitListItemDto(any(UUID.class))).thenReturn(new WaitListItem(WAITING_LIST_ID, 1, 2));
 
 		mockMvc.perform(get("/api/v1/wait-list/00000000-0000-0000-0000-000000000000")
 				.contentType(MediaType.APPLICATION_JSON))
@@ -143,7 +144,7 @@ public class ApiControllerTest {
 
 	@Test
 	void bookOnWaitList() throws Exception {
-		when(repository.newWaitListItemDto(anyInt(), anyInt())).thenReturn(new WaitListItemDto(WAITING_LIST_ID, 1, 2));
+		when(repository.newWaitListItemDto(anyInt(), anyInt())).thenReturn(new WaitListItem(WAITING_LIST_ID, 1, 2));
 		mockMvc.perform(post("/api/v1/wait-list")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("""

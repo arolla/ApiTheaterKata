@@ -2,6 +2,7 @@ package com.example.bestesttheaters.api;
 
 import com.example.bestesttheaters.data.BookingService;
 import com.example.bestesttheaters.data.InMemoryRepository;
+import com.example.bestesttheaters.data.WaitListItem;
 import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,10 +57,11 @@ public class ApiController {
 
 	@GetMapping("/wait-list/{itemId}")
 	public ResponseEntity<WaitListItemDto> waitList(@PathVariable("itemId") UUID itemId) {
-		WaitListItemDto waitListItemDto = repository.getWaitListItemDto(itemId);
-		if (waitListItemDto == null) {
+		WaitListItem waitListItem = repository.getWaitListItemDto(itemId);
+		if (waitListItem == null) {
 			return ResponseEntity.notFound().build();
 		}
+		WaitListItemDto waitListItemDto = map(waitListItem);
 
 		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemDto.getItemId()).withSelfRel();
 		waitListItemDto.add(selfLink);
@@ -68,10 +70,15 @@ public class ApiController {
 
 	@PostMapping("/wait-list")
 	public WaitListItemDto waitList(@RequestBody BookingRequestDto bookingRequest) {
-		WaitListItemDto waitListItemDto = repository.newWaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
+		WaitListItem waitListItem = repository.newWaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
+		WaitListItemDto waitListItemDto = map(waitListItem);
 		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemDto.getItemId()).withSelfRel();
 		waitListItemDto.add(selfLink);
 		return waitListItemDto;
+	}
+
+	private WaitListItemDto map(WaitListItem waitListItem) {
+		return new WaitListItemDto(waitListItem.uuid(), waitListItem.showId(), waitListItem.numberOfTickets());
 	}
 
 }

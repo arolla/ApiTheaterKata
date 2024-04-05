@@ -41,7 +41,7 @@ public class InMemoryRepository {
 	private final String showsFile;
 	private final String bookingsFile;
 	private final UuidGenerator uuidGenerator;
-	private final Map<UUID, WaitListItemDto> waitListIndex;
+	private final Map<UUID, WaitListItem> waitListIndex;
 
 	public InMemoryRepository(@Value("${shows.file}") String showsFile, @Value("${bookings.file}") String bookingsFile, UuidGenerator uuidGenerator) {
 		this.showsFile = showsFile;
@@ -122,18 +122,18 @@ public class InMemoryRepository {
 		}
 	}
 
-	public WaitListItemDto newWaitListItemDto(int showId, int numberOfTickets) {
+	public WaitListItem newWaitListItemDto(int showId, int numberOfTickets) {
 		UUID uuid = uuidGenerator.newUuid();
-		WaitListItemDto waitListItemDto = new WaitListItemDto(uuid, showId, numberOfTickets);
+		WaitListItem waitListItemDto = new WaitListItem(uuid, showId, numberOfTickets);
 		saveWaitListItem(uuid, waitListItemDto);
 		return waitListItemDto;
 	}
 
-	public WaitListItemDto getWaitListItemDto(UUID itemId) {
+	public WaitListItem getWaitListItemDto(UUID itemId) {
 		return waitListIndex.get(itemId);
 	}
 
-	void saveWaitListItem(UUID uuid, WaitListItemDto waitListItemDto) {
+	void saveWaitListItem(UUID uuid, WaitListItem waitListItemDto) {
 		waitListIndex.put(uuid, waitListItemDto);
 	}
 
