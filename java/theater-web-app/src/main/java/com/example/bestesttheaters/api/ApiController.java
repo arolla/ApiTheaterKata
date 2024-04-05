@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -16,10 +17,12 @@ public class ApiController {
 
 	private final InMemoryRepository repository;
 	private final BookingService bookingService;
+	private final UuidGenerator uuidGenerator;
 
-	public ApiController(InMemoryRepository repository, BookingService bookingService) {
+	public ApiController(InMemoryRepository repository, BookingService bookingService, UuidGenerator uuidGenerator) {
 		this.repository = repository;
         this.bookingService = bookingService;
+        this.uuidGenerator = uuidGenerator;
     }
 
 	@GetMapping("/shows/{showId}")
@@ -54,9 +57,10 @@ public class ApiController {
 	}
 
 	@GetMapping("/wait-list/{itemId}")
-	public WaitListItemDto waitList(@PathVariable("itemId") int itemId) {
+	public WaitListItemDto waitList(@PathVariable("itemId") UUID itemId) {
+		UUID uuid = uuidGenerator.newUuid();
 		WaitListItemDto waitListItemDto = new WaitListItemDto(1, 2);
-		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(itemId).withSelfRel();
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(uuid).withSelfRel();
 		waitListItemDto.add(selfLink);
 		return waitListItemDto;
 	}
@@ -64,7 +68,7 @@ public class ApiController {
 	@PostMapping("/wait-list")
 	public WaitListItemDto waitList(@RequestBody BookingRequestDto bookingRequest) {
 		WaitListItemDto waitListItemDto = new WaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
-		int waitListItemId = 1;
+		UUID waitListItemId = uuidGenerator.newUuid();
 		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemId).withSelfRel();
 		waitListItemDto.add(selfLink);
 		return waitListItemDto;

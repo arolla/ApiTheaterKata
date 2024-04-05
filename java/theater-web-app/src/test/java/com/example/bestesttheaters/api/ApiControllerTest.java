@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -31,6 +32,11 @@ public class ApiControllerTest {
 	@MockBean
 	private InMemoryRepository repository;
 
+	@MockBean
+	private UuidGenerator uuidGenerator;
+
+	private static final UUID WAITING_LIST_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
+
 	@BeforeEach
 	void setUp() {
 		List<Show> show = List.of(
@@ -39,6 +45,8 @@ public class ApiControllerTest {
 				"The Matrix")
 		);
 		when(repository.findAll()).thenReturn(show);
+
+		when(uuidGenerator.newUuid()).thenReturn(WAITING_LIST_ID);
 	}
 
 	@Test
@@ -109,10 +117,9 @@ public class ApiControllerTest {
 				}"""));
 	}
 
-
 	@Test
 	void getWaitListItem() throws Exception {
-		mockMvc.perform(get("/api/v1/wait-list/1")
+		mockMvc.perform(get("/api/v1/wait-list/00000000-0000-0000-0000-000000000000")
 				.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(content().json("""
@@ -121,7 +128,7 @@ public class ApiControllerTest {
                     	"numberOfTickets": 2,
                     	"_links": {
                     		"self": {
-                    			"href":"http://localhost/api/v1/wait-list/1"
+                    			"href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
                     		}
                     	}
                     }"""));
@@ -143,7 +150,7 @@ public class ApiControllerTest {
 					"numberOfTickets": 2,
 					"_links": {
 	                    "self": {
-                            "href":"http://localhost/api/v1/wait-list/1"
+                            "href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
 						}
 					}
 				}"""));
