@@ -15,6 +15,8 @@
  */
 package com.example.bestesttheaters.data;
 
+import com.example.bestesttheaters.api.UuidGenerator;
+import com.example.bestesttheaters.api.WaitListItemDto;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +29,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class InMemoryRepository {
@@ -39,12 +40,16 @@ public class InMemoryRepository {
 	private final List<Booking> bookings;
 	private final String showsFile;
 	private final String bookingsFile;
+	private final UuidGenerator uuidGenerator;
+	private final Map<UUID, WaitListItemDto> waitListIndex;
 
-	public InMemoryRepository(@Value("${shows.file}") String showsFile, @Value("${bookings.file}") String bookingsFile) {
+	public InMemoryRepository(@Value("${shows.file}") String showsFile, @Value("${bookings.file}") String bookingsFile, UuidGenerator uuidGenerator) {
 		this.showsFile = showsFile;
 		this.bookingsFile = bookingsFile;
-		bookings = new ArrayList<>();
-	}
+        this.uuidGenerator = uuidGenerator;
+        bookings = new ArrayList<>();
+        waitListIndex = new HashMap<>();
+    }
 
 	public List<Show> findAll() {
 		return shows;
@@ -115,6 +120,21 @@ public class InMemoryRepository {
 		} catch (IOException e) {
 			throw new IllegalStateException("Cannot load bookings", e);
 		}
+	}
+
+	public WaitListItemDto newWaitListItemDto(int showId, int numberOfTickets) {
+		UUID uuid = uuidGenerator.newUuid();
+		WaitListItemDto waitListItemDto = new WaitListItemDto(uuid, showId, numberOfTickets);
+		saveWaitListItem(uuid, waitListItemDto);
+		return waitListItemDto;
+	}
+
+	public WaitListItemDto getWaitListItemDto(UUID itemId) {
+		return waitListIndex.get(itemId);
+	}
+
+	void saveWaitListItem(UUID uuid, WaitListItemDto waitListItemDto) {
+		waitListIndex.put(uuid, waitListItemDto);
 	}
 
 }

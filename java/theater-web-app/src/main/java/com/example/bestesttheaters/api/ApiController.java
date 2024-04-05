@@ -17,12 +17,10 @@ public class ApiController {
 
 	private final InMemoryRepository repository;
 	private final BookingService bookingService;
-	private final UuidGenerator uuidGenerator;
 
-	public ApiController(InMemoryRepository repository, BookingService bookingService, UuidGenerator uuidGenerator) {
+	public ApiController(InMemoryRepository repository, BookingService bookingService) {
 		this.repository = repository;
         this.bookingService = bookingService;
-        this.uuidGenerator = uuidGenerator;
     }
 
 	@GetMapping("/shows/{showId}")
@@ -57,19 +55,21 @@ public class ApiController {
 	}
 
 	@GetMapping("/wait-list/{itemId}")
-	public WaitListItemDto waitList(@PathVariable("itemId") UUID itemId) {
-		UUID uuid = uuidGenerator.newUuid();
-		WaitListItemDto waitListItemDto = new WaitListItemDto(1, 2);
-		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(uuid).withSelfRel();
+	public ResponseEntity<WaitListItemDto> waitList(@PathVariable("itemId") UUID itemId) {
+		WaitListItemDto waitListItemDto = repository.getWaitListItemDto(itemId);
+		if (waitListItemDto == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemDto.getItemId()).withSelfRel();
 		waitListItemDto.add(selfLink);
-		return waitListItemDto;
+		return ResponseEntity.ok(waitListItemDto);
 	}
 
 	@PostMapping("/wait-list")
 	public WaitListItemDto waitList(@RequestBody BookingRequestDto bookingRequest) {
-		WaitListItemDto waitListItemDto = new WaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
-		UUID waitListItemId = uuidGenerator.newUuid();
-		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemId).withSelfRel();
+		WaitListItemDto waitListItemDto = repository.newWaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemDto.getItemId()).withSelfRel();
 		waitListItemDto.add(selfLink);
 		return waitListItemDto;
 	}

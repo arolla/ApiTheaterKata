@@ -1,5 +1,6 @@
 package com.example.bestesttheaters.data;
 
+import com.example.bestesttheaters.api.RandomUuidGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ class InMemoryRepositoryTest {
 		Path showsPath = getJsonPath("/shows.csv");
 		Path bookingsPath = getJsonPath("/bookings.csv");
 
-		var repository = new InMemoryRepository(showsPath.toString(), bookingsPath.toString());
+		var repository = new InMemoryRepository(showsPath.toString(), bookingsPath.toString(), new RandomUuidGenerator());
 		repository.init();
 
 		List<Show> allShows = repository.findAll();

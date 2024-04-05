@@ -2,13 +2,21 @@ package com.example.bestesttheaters.api;
 
 import org.springframework.hateoas.RepresentationModel;
 
+import java.util.UUID;
+
 public class WaitListItemDto extends RepresentationModel<WaitListItemDto> {
+	private final UUID itemId;
 	private final int showId;
 	private final int numberOfTickets;
 
-	public WaitListItemDto(int showId, int numberOfTickets) {
+	public WaitListItemDto(UUID itemId, int showId, int numberOfTickets) {
+		this.itemId = itemId;
 		this.showId = showId;
 		this.numberOfTickets = numberOfTickets;
+	}
+
+	public UUID getItemId() {
+		return itemId;
 	}
 
 	public int getShowId() {

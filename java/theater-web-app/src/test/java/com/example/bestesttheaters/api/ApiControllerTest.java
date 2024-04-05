@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -32,9 +34,6 @@ public class ApiControllerTest {
 	@MockBean
 	private InMemoryRepository repository;
 
-	@MockBean
-	private UuidGenerator uuidGenerator;
-
 	private static final UUID WAITING_LIST_ID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
 	@BeforeEach
@@ -45,8 +44,6 @@ public class ApiControllerTest {
 				"The Matrix")
 		);
 		when(repository.findAll()).thenReturn(show);
-
-		when(uuidGenerator.newUuid()).thenReturn(WAITING_LIST_ID);
 	}
 
 	@Test
@@ -117,8 +114,11 @@ public class ApiControllerTest {
 				}"""));
 	}
 
+
 	@Test
 	void getWaitListItem() throws Exception {
+		when(repository.getWaitListItemDto(any(UUID.class))).thenReturn(new WaitListItemDto(WAITING_LIST_ID, 1, 2));
+
 		mockMvc.perform(get("/api/v1/wait-list/00000000-0000-0000-0000-000000000000")
 				.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
@@ -135,7 +135,15 @@ public class ApiControllerTest {
 	}
 
 	@Test
+	void waitListItemNotFound() throws Exception {
+		mockMvc.perform(get("/api/v1/wait-list/00000000-0000-0000-0000-000000000000")
+				.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isNotFound());
+	}
+
+	@Test
 	void bookOnWaitList() throws Exception {
+		when(repository.newWaitListItemDto(anyInt(), anyInt())).thenReturn(new WaitListItemDto(WAITING_LIST_ID, 1, 2));
 		mockMvc.perform(post("/api/v1/wait-list")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("""
