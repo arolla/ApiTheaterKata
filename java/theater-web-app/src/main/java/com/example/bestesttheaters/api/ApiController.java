@@ -53,4 +53,21 @@ public class ApiController {
 		return bookingService.getBookingDto(bookingRequest);
 	}
 
+	@GetMapping("/wait-list/{itemId}")
+	public WaitListItemDto waitList(@PathVariable("itemId") int itemId) {
+		WaitListItemDto waitListItemDto = new WaitListItemDto(1, 2);
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(itemId).withSelfRel();
+		waitListItemDto.add(selfLink);
+		return waitListItemDto;
+	}
+
+	@PostMapping("/wait-list")
+	public WaitListItemDto waitList(@RequestBody BookingRequestDto bookingRequest) {
+		WaitListItemDto waitListItemDto = new WaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());
+		int waitListItemId = 1;
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemId).withSelfRel();
+		waitListItemDto.add(selfLink);
+		return waitListItemDto;
+	}
+
 }

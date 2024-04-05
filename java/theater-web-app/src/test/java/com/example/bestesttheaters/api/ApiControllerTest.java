@@ -109,4 +109,44 @@ public class ApiControllerTest {
 				}"""));
 	}
 
+
+	@Test
+	void getWaitListItem() throws Exception {
+		mockMvc.perform(get("/api/v1/wait-list/1")
+				.contentType(MediaType.APPLICATION_JSON))
+			.andExpect(status().isOk())
+			.andExpect(content().json("""
+                    {
+                    	"showId": 1,
+                    	"numberOfTickets": 2,
+                    	"_links": {
+                    		"self": {
+                    			"href":"http://localhost/api/v1/wait-list/1"
+                    		}
+                    	}
+                    }"""));
+	}
+
+	@Test
+	void bookOnWaitList() throws Exception {
+		mockMvc.perform(post("/api/v1/wait-list")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content("""
+					{
+						"showId": 1,
+						"numberOfTickets": 2
+					}"""))
+			.andExpect(status().isOk())
+			.andExpect(content().json("""
+				{
+					"showId": 1,
+					"numberOfTickets": 2,
+					"_links": {
+	                    "self": {
+                            "href":"http://localhost/api/v1/wait-list/1"
+						}
+					}
+				}"""));
+	}
+
 }
