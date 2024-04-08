@@ -68,6 +68,22 @@ public class ApiController {
 		return ResponseEntity.ok(waitListItemDto);
 	}
 
+	@GetMapping("/wait-list")
+	public WaitListDto listWaitList() {
+		List<WaitListItemDto> list = repository.findAllWaitListItems().stream()
+			.map(this::map)
+			.toList();
+		list.forEach(waitListItemDto -> {
+			Link selfLink = linkTo(ApiController.class).slash("wait-list").slash(waitListItemDto.getItemId()).withSelfRel();
+			waitListItemDto.add(selfLink);
+		});
+		WaitListDto waitListDto = new WaitListDto(list);
+		Link selfLink = linkTo(ApiController.class).slash("wait-list").withSelfRel();
+		waitListDto.add(selfLink);
+		return waitListDto;
+	}
+
+
 	@PostMapping("/wait-list")
 	public WaitListItemDto waitList(@RequestBody BookingRequestDto bookingRequest) {
 		WaitListItem waitListItem = repository.newWaitListItemDto(bookingRequest.showId(), bookingRequest.numberOfTickets());

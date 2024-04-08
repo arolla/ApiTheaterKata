@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(ApiController.class)
-@Import(BookingService.class)
+@Import({BookingService.class, ApiConfig.class})
 public class ApiControllerTest {
 
 	@Autowired
@@ -124,15 +124,15 @@ public class ApiControllerTest {
 				.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isOk())
 			.andExpect(content().json("""
-                    {
-                    	"showId": 1,
-                    	"numberOfTickets": 2,
-                    	"_links": {
-                    		"self": {
-                    			"href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
-                    		}
-                    	}
-                    }"""));
+				{
+					"showId": 1,
+					"numberOfTickets": 2,
+					"_links": {
+						"self": {
+							"href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
+						}
+					}
+				}"""));
 	}
 
 	@Test
@@ -140,6 +140,51 @@ public class ApiControllerTest {
 		mockMvc.perform(get("/api/v1/wait-list/00000000-0000-0000-0000-000000000000")
 				.contentType(MediaType.APPLICATION_JSON))
 			.andExpect(status().isNotFound());
+	}
+
+	@Test
+	void listWaitListItems() throws Exception {
+		when(repository.findAllWaitListItems()).thenReturn(List.of(
+			new WaitListItem(UUID.fromString("00000000-0000-0000-0000-000000000001"), 1, 2),
+			new WaitListItem(UUID.fromString("00000000-0000-0000-0000-000000000002"), 1, 3)));
+
+		mockMvc.perform(get("/api/v1/wait-list")
+				.contentType(MediaType.APPLICATION_JSON)
+				.header("X-Forwarded-Proto", "https")
+				.header("X-Forwarded-Host", "example.com")
+				.header("X-Forwarded-Port", "9001"))
+			.andExpect(status().isOk())
+			.andExpect(content().json(
+				"""
+					{
+						"items": [
+							{
+								"showId": 1,
+								"numberOfTickets": 2,
+								"_links": {
+									"self": {
+										"href":"https://example.com:9001/api/v1/wait-list/00000000-0000-0000-0000-000000000001"
+									}
+								}
+							},
+							{
+								"showId": 1,
+								"numberOfTickets": 3,
+								"_links": {
+									"self": {
+										"href":"https://example.com:9001/api/v1/wait-list/00000000-0000-0000-0000-000000000002"
+									}
+								}
+							}
+						],
+						"_links": {
+							"self": {
+								"href":"https://example.com:9001/api/v1/wait-list"
+							}
+						}
+					}"""
+			));
+
 	}
 
 	@Test
@@ -158,8 +203,8 @@ public class ApiControllerTest {
 					"showId": 1,
 					"numberOfTickets": 2,
 					"_links": {
-	                    "self": {
-                            "href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
+						"self": {
+							"href":"http://localhost/api/v1/wait-list/00000000-0000-0000-0000-000000000000"
 						}
 					}
 				}"""));

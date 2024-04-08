@@ -137,4 +137,7 @@ public class InMemoryRepository {
 		waitListIndex.put(uuid, waitListItemDto);
 	}
 
+	public List<WaitListItem> findAllWaitListItems() {
+		return null;
+	}
 }
