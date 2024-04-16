@@ -5,17 +5,23 @@
         public IEnumerable<Show> FetchShows()
         {
             var TOMORROW = DateTime.Now.AddDays(1);
+            var shows = GetShows(TOMORROW);
+            return shows;
+        }
+
+        private static List<Show> GetShows(DateTime date)
+        {
             var shows = new List<Show>
             {
-                new Show{ Id =1, Date = TOMORROW, Title = "Miraculous"},
-                new Show{ Id =2, Date = TOMORROW, Title = "Les As de la jungle 2"},
-                new Show{ Id =3, Date = TOMORROW, Title = "Anatomie d'une chute"},
-                new Show{ Id =4, Date = TOMORROW, Title = "Tempête"},
-                new Show{ Id =5, Date = TOMORROW, Title = "Passages"},
-                new Show{ Id =6, Date = TOMORROW, Title = "Mon chat et moi"},
-                new Show{ Id =7, Date = TOMORROW, Title = "Les Choses simples"},
-                new Show{ Id =8, Date = TOMORROW, Title = "Le Bleu du caftan"},
-                new Show{ Id =9, Date = TOMORROW, Title = "Mon crime"}
+                new() { Id = 1, Date = date, Title = "Miraculous" },
+                new() { Id = 2, Date = date, Title = "Les As de la jungle 2" },
+                new() { Id = 3, Date = date, Title = "Anatomie d'une chute" },
+                new() { Id = 4, Date = date, Title = "Tempête" },
+                new() { Id = 5, Date = date, Title = "Passages" },
+                new() { Id = 6, Date = date, Title = "Mon chat et moi" },
+                new() { Id = 7, Date = date, Title = "Les Choses simples" },
+                new() { Id = 8, Date = date, Title = "Le Bleu du caftan" },
+                new() { Id = 9, Date = date, Title = "Mon crime" }
             };
             return shows;
         }
@@ -26,7 +32,8 @@
 
             for (var i = 0; i < 10; i++)
             {
-                var randomSeatSeed = new Random().Next(0, 100);
+                var seatSeed = new Random().Next(0, 100);
+                var randomSeatSeed = seatSeed;
 
                 var randSeatCount = new Random().Next(1, 5);
 
@@ -40,10 +47,13 @@
 
                 var details = seatsAsStrings.Aggregate((prev, next) => prev + ", " + next);
 
+                var dateTime = new DateTime(2024, 1, 2, 13, 16, 0, DateTimeKind.Utc);
+                var sessions = GetShows(dateTime);
+                var sessionIndex = new Random().Next(0, sessions.Count);
                 var oneRow = new BkngData_3()
                 {
-                    Title = $"Title{new Random().Next(0, 100).ToString("D2")}",
-                    Date = new DateTime(2024, 1, 2, 13, 16, 0, DateTimeKind.Utc),
+                    Title = sessions[sessionIndex].Title,
+                    Date = dateTime,
                     Details = details
                 };
 
