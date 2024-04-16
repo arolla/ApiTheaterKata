@@ -2,6 +2,8 @@
 {
     public class ShowService
     {
+        private static List<BkngData_3> BookedShows { get; set; } = new();
+
         public IEnumerable<Show> FetchShows()
         {
             var TOMORROW = DateTime.Now.AddDays(1);
@@ -28,39 +30,29 @@
 
         public List<BkngData_3> GetMyBookings()
         {
-            var data = new List<BkngData_3>();
+            return BookedShows;
+        }
 
-            for (var i = 0; i < 10; i++)
+        public void Book(Show showBooked)
+        {
+            var seatsAsStrings = GetSeats();
+            var details = seatsAsStrings.Aggregate((prev, next) => prev + ", " + next);
+            BookedShows.Add(new BkngData_3 { Title = showBooked.Title, Date = showBooked.Date, Details = details });
+        }
+
+        private static List<string> GetSeats()
+        {
+            var randomSeatSeed = new Random().Next(0, 100);
+            var randSeatCount = new Random().Next(1, 5);
+            var seatsAsStrings = new List<string>();
+            for (var j = 0; j < randSeatCount; j++)
             {
-                var seatSeed = new Random().Next(0, 100);
-                var randomSeatSeed = seatSeed;
+                int randomizedNumber = new Random().Next(randomSeatSeed, randomSeatSeed + 100);
 
-                var randSeatCount = new Random().Next(1, 5);
-
-                var seatsAsStrings = new List<string>();
-                for (var j = 0; j < randSeatCount; j++)
-                {
-                    int randomizedNumber = new Random().Next(randomSeatSeed, randomSeatSeed + 100);
-
-                    seatsAsStrings.Add($"Seats {randomizedNumber.ToString("D2")}");
-                }
-
-                var details = seatsAsStrings.Aggregate((prev, next) => prev + ", " + next);
-
-                var dateTime = new DateTime(2024, 1, 2, 13, 16, 0, DateTimeKind.Utc);
-                var sessions = GetShows(dateTime);
-                var sessionIndex = new Random().Next(0, sessions.Count);
-                var oneRow = new BkngData_3()
-                {
-                    Title = sessions[sessionIndex].Title,
-                    Date = dateTime,
-                    Details = details
-                };
-
-                data.Add(oneRow);
+                seatsAsStrings.Add($"Seats {randomizedNumber.ToString("D2")}");
             }
 
-            return data;
+            return seatsAsStrings;
         }
     }
 }
