@@ -23,7 +23,7 @@
             <tr>
                 <td>@item.Title</td>
                 <td>@item.Date.ToString("yyyy-MM-dd")</td>
-                <td><a asp-page="./Book" asp-route-id="@item.Id">Book</a></td>
+                <td><a asp-page="./Book" asp-route-sessionId="@item.Id">Book</a></td>
             </tr>
         }
     </tbody>
