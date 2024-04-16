@@ -2,4 +2,22 @@
 @model MyBookingsModel
 @{
 }
-Hello from my bookings view.
+<table class="table">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BkngData)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Date.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>@item.Details</td>
+            </tr>
+        }
+    </tbody>
+</table>
