@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Here all theater sessions!</p>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Session Date</th>
+            <th>Book Session</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Shows)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.Date.ToString("yyyy-MM-dd")</td>
+                <td><a asp-page="./Book" asp-route-id="@item.Id">Book</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
