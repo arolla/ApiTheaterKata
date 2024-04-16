@@ -1,7 +1,10 @@
+using BestestTheater.WebApp.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<ShowService>();
 
 var app = builder.Build();
 
